@@ -1,9 +1,13 @@
 package financeiro.example.financeiro.entity;
-
 import jakarta.persistence.*;
-import org.hibernate.engine.internal.Cascade;
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Conta {
 
     @Id
@@ -14,12 +18,4 @@ public class Conta {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
