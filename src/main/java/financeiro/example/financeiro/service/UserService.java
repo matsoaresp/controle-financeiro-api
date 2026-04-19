@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public void delete (Long id) throws Exception {
-        if (userRepository.existsById(id)
+        if (!userRepository.existsById(id)
         ) {
             throw new Exception("Usuario não encontrado");
         }

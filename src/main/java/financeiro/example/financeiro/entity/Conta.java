@@ -1,5 +1,6 @@
 package financeiro.example.financeiro.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,9 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String numero;
+    private String agencia;
+    private String banco;
     private double saldo;
     @ManyToOne()
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
