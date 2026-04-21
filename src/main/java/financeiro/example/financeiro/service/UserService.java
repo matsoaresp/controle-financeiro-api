@@ -15,14 +15,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public Usuario create (RequestUserDto dto) throws Exception {
-        Usuario usuario = new Usuario(
-                dto.getEmail(),
-                dto.getPassword()
-        );
 
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new Exception("Email já cadastrado");
         }
+        Usuario usuario = new Usuario(
+                dto.getEmail(),
+                dto.getPassword()
+        );
         return userRepository.save(usuario);
     }
 

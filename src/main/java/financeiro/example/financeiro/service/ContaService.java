@@ -22,9 +22,7 @@ public class ContaService {
 
 
     public Conta create (RequestContaDto contaDto) throws  Exception{
-
         Conta conta;
-
         if (contaDto.getTipoConta().equalsIgnoreCase("CORRENTE")){
             conta = new ContaCorrente();
         }else if (contaDto.getTipoConta().equalsIgnoreCase("POUPANCA")){
