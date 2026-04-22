@@ -22,4 +22,5 @@ public class Conta {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
+
 }

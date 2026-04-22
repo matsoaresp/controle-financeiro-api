@@ -10,15 +10,14 @@ import financeiro.example.financeiro.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ContaService {
 
     @Autowired
     private ContaRepository contaRepository;
-    @Autowired
-    private ContaPoupancaRepository poupancaRepository;
-    @Autowired
-    private ContaCorrenteRepository correnteRepository;
 
 
     public Conta create (RequestContaDto contaDto) throws  Exception{
@@ -38,5 +37,21 @@ public class ContaService {
         conta.setAgencia(contaDto.getAgencia());
 
         return contaRepository.save(conta);
+    }
+
+    public List<Conta> findAll (){
+        return contaRepository.findAll();
+    }
+
+    public Conta findOne (Long id)throws Exception {
+
+        return contaRepository.findById(id).orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+    }
+
+    public void delete (Long id) throws Exception {
+        if (!contaRepository.existsById(id)){
+            throw  new Exception("Conta não encontrada");
+        }
+        contaRepository.deleteById(id);
     }
 }
