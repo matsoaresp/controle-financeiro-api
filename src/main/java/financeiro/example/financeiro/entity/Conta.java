@@ -18,6 +18,7 @@ public class Conta {
     private String agencia;
     private String banco;
     private double saldo;
+    private String tipoConta;
     @ManyToOne()
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;

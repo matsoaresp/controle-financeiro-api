@@ -4,14 +4,12 @@ import financeiro.example.financeiro.dto.RequestContaDto;
 import financeiro.example.financeiro.entity.Conta;
 import financeiro.example.financeiro.entity.ContaCorrente;
 import financeiro.example.financeiro.entity.ContaPoupanca;
-import financeiro.example.financeiro.repository.ContaCorrenteRepository;
-import financeiro.example.financeiro.repository.ContaPoupancaRepository;
 import financeiro.example.financeiro.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ContaService {
@@ -43,15 +41,12 @@ public class ContaService {
         return contaRepository.findAll();
     }
 
-    public Conta findOne (Long id)throws Exception {
-
+    public Conta findOne (Long id) {
         return contaRepository.findById(id).orElseThrow(() -> new RuntimeException("Conta não encontrada"));
     }
 
     public void delete (Long id) throws Exception {
-        if (!contaRepository.existsById(id)){
-            throw  new Exception("Conta não encontrada");
-        }
-        contaRepository.deleteById(id);
+        Conta conta = findOne(id);
+        contaRepository.delete(conta);
     }
 }
