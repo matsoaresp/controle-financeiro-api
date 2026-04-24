@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(value ="/users")
+@RequestMapping(value ="/user")
 public class UserController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class UserController {
         return ResponseEntity.ok().body(usuario);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<ResponseUserDto> update (
             @PathVariable Long id,
             @RequestBody RequestUserDto dto)
