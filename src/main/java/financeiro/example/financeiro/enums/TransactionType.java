@@ -1,7 +1,7 @@
 package financeiro.example.financeiro.enums;
 
 public enum TransactionType {
-    DEPOSITO,
+    DEPOSIT,
     WITHDRAW,
     TRANSFER
 }
