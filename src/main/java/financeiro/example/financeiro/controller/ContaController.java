@@ -2,7 +2,6 @@ package financeiro.example.financeiro.controller;
 import financeiro.example.financeiro.dto.RequestContaDto;
 import financeiro.example.financeiro.entity.Conta;
 import financeiro.example.financeiro.service.ContaService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class ContaController {
         return ResponseEntity.ok().body(conta);
     }
 
-    @GetMapping(value="/{id}")
+    @GetMapping
     public ResponseEntity<List<Conta>> findAll (){
         List<Conta> conta = contaService.findAll();
         return ResponseEntity.ok().body(conta);
