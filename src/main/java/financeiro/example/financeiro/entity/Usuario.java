@@ -13,11 +13,18 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String email;
+
     private String senha;
+
     @OneToMany(mappedBy = "usuario")
     private List<Conta> contas ;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Transacao> transacoes;
 
     public Usuario(String email, String senha) {
         this.email = email;
