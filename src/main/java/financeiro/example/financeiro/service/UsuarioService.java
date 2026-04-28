@@ -30,7 +30,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario findById(Long id){
+    public Usuario findOne(Long id){
         return usuarioRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 

@@ -28,7 +28,6 @@ public class ContaService {
         } else {
             throw new Exception("Dados informados incorretamente");
         }
-
         conta.setNumero(contaDto.getNumero());
         conta.setBanco(contaDto.getBanco());
         conta.setAgencia(contaDto.getAgencia());

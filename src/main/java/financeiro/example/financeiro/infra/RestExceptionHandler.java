@@ -1,5 +1,6 @@
 package financeiro.example.financeiro.infra;
 
+import financeiro.example.financeiro.exception.AccountValueException;
 import financeiro.example.financeiro.exception.EmailAlreadyExistsException;
 import financeiro.example.financeiro.exception.UserFullException;
 import financeiro.example.financeiro.exception.UserNotFoundException;
@@ -28,5 +29,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> emailExistsHandler(EmailAlreadyExistsException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Email já existe");
+    }
+
+    @ExceptionHandler(AccountValueException.class)
+    private ResponseEntity<String> accountValueHandler(AccountValueException exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Saldo não pode ser negativo");
     }
 }

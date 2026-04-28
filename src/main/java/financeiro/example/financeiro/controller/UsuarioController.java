@@ -25,7 +25,7 @@ public class UsuarioController {
 
     @GetMapping(value="/{id}")
     public ResponseEntity<Usuario> findOne (@PathVariable Long id){
-        Usuario usuario = usuarioService.findById(id);
+        Usuario usuario = usuarioService.findOne(id);
         return ResponseEntity.ok().body(usuario);
     }
 
