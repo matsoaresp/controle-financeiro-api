@@ -1,8 +1,11 @@
 package financeiro.example.financeiro.entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 
 @Entity
@@ -29,5 +32,8 @@ public class Conta {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
+    @ManyToMany(mappedBy = "contas")
+    @JsonIgnoreProperties("contas")
+    private List<Transacao> transacoes;
 
 }
