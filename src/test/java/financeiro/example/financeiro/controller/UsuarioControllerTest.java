@@ -46,7 +46,7 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void deveAtualizarUsuario() {
+    void deveLancarExcecao() {
 
         Long id = 1L;
         Usuario usuario = new Usuario();
@@ -64,6 +64,26 @@ class UsuarioControllerTest {
             service.update(id, dto);
         });
         verify(repository, never()).save(any());
+    }
+
+    @Test
+    void deveAtualizarUsuario() {
+
+        Long id = 1L;
+        Usuario usuario = new Usuario();
+
+        usuario.setId(id);
+        usuario.setEmail("maateussp@gmail.com");
+        usuario.setSenha("123456");
+
+        when(repository.findById(id)).thenReturn(Optional.of(usuario));
+        when(repository.existsByEmail("jose@gmail.com")).thenReturn(true);
+
+        RequestUserDto dto = new RequestUserDto();
+        dto.setEmail("jose@gmail.com");
+        service.update(id, dto);
+
+        verify(repository).save(any());
     }
 
     @Test
