@@ -18,7 +18,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> create (@RequestBody RequestUserDto dto) throws Exception {
+    public ResponseEntity<Usuario> create (@RequestBody RequestUserDto dto) {
         Usuario usuario = usuarioService.create(dto);
         return ResponseEntity.ok().body(usuario);
     }
