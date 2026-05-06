@@ -37,7 +37,7 @@ class UsuarioControllerTest {
 
         when(repository.existsByEmail(dto.getEmail())).thenReturn(false);
 
-        Usuario usuarioSalvo = new Usuario(dto.getEmail(), dto.getPassword());
+        Usuario usuarioSalvo = new Usuario(dto.getNome(), dto.getEmail(), dto.getPassword());
         when(repository.save(any())).thenReturn(usuarioSalvo);
 
         Usuario result = service.create(dto);
