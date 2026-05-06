@@ -1,9 +1,6 @@
 package financeiro.example.financeiro.infra;
 
-import financeiro.example.financeiro.exception.AccountValueException;
-import financeiro.example.financeiro.exception.EmailAlreadyExistsException;
-import financeiro.example.financeiro.exception.UserFullException;
-import financeiro.example.financeiro.exception.UserNotFoundException;
+import financeiro.example.financeiro.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,8 +29,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(AccountValueException.class)
-    private ResponseEntity<String> accountValueHandler(AccountValueException exception){
+    private ResponseEntity<String> AccountValueHandler(AccountValueException exception){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Saldo não pode ser negativo");
+    }
+    @ExceptionHandler(AccountDataIncorrect.class)
+    private ResponseEntity<String> AccountIncorrectHandler(AccountDataIncorrect exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Dados Informados incorretamente");
+    }
+    @ExceptionHandler(AccountNotFound.class)
+    private ResponseEntity<String> AccountNotFoundHandler(AccountNotFound exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Conta não eEncontrada");
     }
 }
