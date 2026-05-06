@@ -20,10 +20,10 @@ public class UsuarioService {
 
     public Usuario create (RequestUserDto dto){
         Usuario usuario = new Usuario(
+                dto.getNome(),
                 dto.getEmail(),
                 dto.getPassword()
         );
-
         if (usuarioRepository.existsByEmail(dto.getEmail())) {
             throw new EmailAlreadyExistsException();
         }
