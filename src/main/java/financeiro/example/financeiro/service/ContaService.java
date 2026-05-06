@@ -4,6 +4,7 @@ import financeiro.example.financeiro.dto.RequestContaDto;
 import financeiro.example.financeiro.entity.Conta;
 import financeiro.example.financeiro.entity.ContaCorrente;
 import financeiro.example.financeiro.entity.ContaPoupanca;
+import financeiro.example.financeiro.enums.ContaType;
 import financeiro.example.financeiro.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,9 @@ public class ContaService {
     public Conta create (RequestContaDto contaDto) throws  Exception{
 
         Conta conta;
-
-        if (contaDto.getTipoConta().equalsIgnoreCase("CORRENTE")){
+        if (contaDto.getTipoConta() == ContaType.CORRENTE){
             conta = new ContaCorrente();
-        }else if (contaDto.getTipoConta().equalsIgnoreCase("POUPANCA")){
+        }else if (contaDto.getTipoConta() == ContaType.POUPANCA){
             conta = new ContaPoupanca();
         } else {
             throw new Exception("Dados informados incorretamente");
@@ -31,6 +31,7 @@ public class ContaService {
         conta.setNumero(contaDto.getNumero());
         conta.setBanco(contaDto.getBanco());
         conta.setAgencia(contaDto.getAgencia());
+        conta.setTipoConta(contaDto.getTipoConta());
 
         return contaRepository.save(conta);
     }

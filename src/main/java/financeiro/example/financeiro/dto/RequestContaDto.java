@@ -1,7 +1,13 @@
 package financeiro.example.financeiro.dto;
 
+import financeiro.example.financeiro.entity.Usuario;
+import financeiro.example.financeiro.enums.ContaType;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class RequestContaDto {
     @NotBlank
     private String numero;
@@ -13,39 +19,8 @@ public class RequestContaDto {
     private String agencia;
 
     @NotBlank
-    private String tipoConta;
+    private ContaType tipoConta;
 
-    public @NotBlank String getTipoConta() {
-        return tipoConta;
-    }
-
-    public void setTipoConta(@NotBlank String tipoConta) {
-        this.tipoConta = tipoConta;
-    }
-
-    public @NotBlank String getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(@NotBlank String agencia) {
-        this.agencia = agencia;
-    }
-
-    public @NotBlank String getBanco() {
-        return banco;
-    }
-
-    public void setBanco(@NotBlank String banco) {
-        this.banco = banco;
-    }
-
-    public @NotBlank String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(@NotBlank String numero) {
-        this.numero = numero;
-    }
-
-
+    @NotBlank
+    private Usuario usuario;
 }

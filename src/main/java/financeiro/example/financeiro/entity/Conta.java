@@ -1,5 +1,6 @@
 package financeiro.example.financeiro.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import financeiro.example.financeiro.enums.ContaType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -26,7 +27,8 @@ public class Conta {
 
     private double saldo;
 
-    private String tipoConta;
+    @Enumerated(EnumType.STRING)
+    private ContaType tipoConta;
 
     @ManyToOne()
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
