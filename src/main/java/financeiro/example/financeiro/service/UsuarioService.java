@@ -1,10 +1,10 @@
 package financeiro.example.financeiro.service;
 
-import financeiro.example.financeiro.dto.RequestUserDto;
-import financeiro.example.financeiro.dto.ResponseUserDto;
+import financeiro.example.financeiro.dto.request.RequestUserDto;
+import financeiro.example.financeiro.dto.response.ResponseUserDto;
 import financeiro.example.financeiro.entity.Usuario;
-import financeiro.example.financeiro.exception.EmailAlreadyExistsException;
-import financeiro.example.financeiro.exception.UserNotFoundException;
+import financeiro.example.financeiro.exception.Usuario.EmailAlreadyExistsException;
+import financeiro.example.financeiro.exception.Usuario.UserNotFoundException;
 import financeiro.example.financeiro.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;

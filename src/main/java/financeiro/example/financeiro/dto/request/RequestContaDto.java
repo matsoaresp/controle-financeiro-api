@@ -1,4 +1,4 @@
-package financeiro.example.financeiro.dto;
+package financeiro.example.financeiro.dto.request;
 
 import financeiro.example.financeiro.entity.Usuario;
 import financeiro.example.financeiro.enums.ContaType;

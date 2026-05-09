@@ -1,5 +1,6 @@
 package financeiro.example.financeiro.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +19,15 @@ public class Usuario {
 
     private String email;
 
+    @JsonIgnore
     private String senha;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Conta> contas ;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Transacao> transacoes;
 
     public Usuario(String nome, String email, String senha) {
