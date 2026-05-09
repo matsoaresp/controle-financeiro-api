@@ -1,5 +1,5 @@
 package financeiro.example.financeiro.controller;
-import financeiro.example.financeiro.dto.RequestContaDto;
+import financeiro.example.financeiro.dto.request.RequestContaDto;
 import financeiro.example.financeiro.entity.Conta;
 import financeiro.example.financeiro.service.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
