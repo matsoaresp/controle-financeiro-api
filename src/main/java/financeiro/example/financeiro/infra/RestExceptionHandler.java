@@ -1,6 +1,11 @@
 package financeiro.example.financeiro.infra;
 
-import financeiro.example.financeiro.exception.*;
+import financeiro.example.financeiro.exception.Conta.AccountDataIncorrect;
+import financeiro.example.financeiro.exception.Conta.AccountNotFound;
+import financeiro.example.financeiro.exception.Conta.AccountValueException;
+import financeiro.example.financeiro.exception.Usuario.EmailAlreadyExistsException;
+import financeiro.example.financeiro.exception.Usuario.UserFullException;
+import financeiro.example.financeiro.exception.Usuario.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

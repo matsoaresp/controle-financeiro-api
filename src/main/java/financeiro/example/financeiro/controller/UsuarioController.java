@@ -1,7 +1,7 @@
 package financeiro.example.financeiro.controller;
 
-import financeiro.example.financeiro.dto.RequestUserDto;
-import financeiro.example.financeiro.dto.ResponseUserDto;
+import financeiro.example.financeiro.dto.request.RequestUserDto;
+import financeiro.example.financeiro.dto.response.ResponseUserDto;
 import financeiro.example.financeiro.entity.Usuario;
 import financeiro.example.financeiro.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

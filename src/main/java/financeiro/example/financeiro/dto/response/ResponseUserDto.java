@@ -1,4 +1,4 @@
-package financeiro.example.financeiro.dto;
+package financeiro.example.financeiro.dto.response;
 
 public class ResponseUserDto {
 
