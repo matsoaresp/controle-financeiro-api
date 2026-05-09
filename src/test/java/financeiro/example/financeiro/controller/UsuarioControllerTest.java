@@ -1,8 +1,8 @@
 package financeiro.example.financeiro.controller;
 
-import financeiro.example.financeiro.dto.RequestUserDto;
+import financeiro.example.financeiro.dto.request.RequestUserDto;
 import financeiro.example.financeiro.entity.Usuario;
-import financeiro.example.financeiro.exception.EmailAlreadyExistsException;
+import financeiro.example.financeiro.exception.Usuario.EmailAlreadyExistsException;
 import financeiro.example.financeiro.repository.UsuarioRepository;
 import financeiro.example.financeiro.service.UsuarioService;
 import org.junit.jupiter.api.Test;

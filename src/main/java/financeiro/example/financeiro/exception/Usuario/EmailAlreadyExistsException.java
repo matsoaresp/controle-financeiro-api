@@ -1,4 +1,4 @@
-package financeiro.example.financeiro.exception;
+package financeiro.example.financeiro.exception.Usuario;
 
 public class EmailAlreadyExistsException extends RuntimeException {
     public EmailAlreadyExistsException() {

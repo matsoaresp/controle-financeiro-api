@@ -17,16 +17,12 @@ public class Transacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private double valor;
     @Enumerated(EnumType.STRING)
     private TransactionType type;
-
     private LocalDateTime timestamp;
-
     private String descricao;
 
-    @Enumerated(EnumType.STRING)
-    private TransactionStatus status;
 
     @ManyToOne()
     @JoinColumn(name ="usuario_id", referencedColumnName = "id")
@@ -40,5 +36,4 @@ public class Transacao {
     )
     @JsonIgnoreProperties("transacoes")
     private List<Conta> contas;
-
 }
