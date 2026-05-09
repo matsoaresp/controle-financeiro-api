@@ -1,4 +1,4 @@
-package financeiro.example.financeiro.exception;
+package financeiro.example.financeiro.exception.Conta;
 
 public class AccountDataIncorrect extends RuntimeException {
     public AccountDataIncorrect(String message) {
