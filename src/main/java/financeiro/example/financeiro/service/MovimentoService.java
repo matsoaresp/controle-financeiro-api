@@ -5,8 +5,9 @@ import financeiro.example.financeiro.entity.Conta;
 import financeiro.example.financeiro.entity.Movimento;
 import financeiro.example.financeiro.entity.Usuario;
 import financeiro.example.financeiro.enums.TransactionType;
+import financeiro.example.financeiro.exception.Conta.AccountSmallerValues;
+import financeiro.example.financeiro.repository.ContaRepository;
 import financeiro.example.financeiro.repository.MovimentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,58 +16,62 @@ import java.util.Collections;
 @Service
 public class MovimentoService {
 
-    @Autowired
-    private MovimentoRepository movimentoRepo;
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private ContaService contaService;
+    private final MovimentoRepository movimentoRepo;
+    private final UsuarioService usuarioService;
+    private final ContaService contaService;
+    private final ContaRepository contaRepo;
+
+    public MovimentoService(MovimentoRepository movimentoRepo, UsuarioService usuarioService, ContaService contaService, ContaRepository contaRepo) {
+        this.movimentoRepo = movimentoRepo;
+        this.usuarioService = usuarioService;
+        this.contaService = contaService;
+        this.contaRepo = contaRepo;
+    }
 
 
-    public Movimento transfer (RequestTransacaoDto dto){
+    private Movimento criarMovimento (
+            RequestTransacaoDto dto,
+            TransactionType type){
 
         Usuario usuario = usuarioService.findOne(dto.getUsuario().getId());
         Conta conta = contaService.findOne(dto.getContas().getId());
         Movimento movimento = new Movimento();
+
         movimento.setValor(dto.getValor());
-        movimento.setType(TransactionType.TRANSFER);
+        movimento.setType(type);
         movimento.setUsuario(usuario);
-        conta.setSaldo(dto.getValor() - conta.getSaldo());
         movimento.setTimestamp(LocalDateTime.now());
         movimento.setContas(Collections.singletonList(conta));
         return movimentoRepo.save(movimento);
     }
 
-    public Movimento deposit(RequestTransacaoDto dto){
-
-        Usuario usuario = usuarioService.findOne(dto.getUsuario().getId());
+    public Movimento transfer (RequestTransacaoDto dto){
         Conta conta = contaService.findOne(dto.getContas().getId());
+        if (conta.getSaldo() < dto.getValor()){
+            throw new AccountSmallerValues();
+        }
+            conta.setSaldo(conta.getSaldo() - dto.getValor());
+            contaRepo.save(conta);
 
-        Movimento deposit = new Movimento();
-        deposit.setValor(dto.getValor());
-        deposit.setType(TransactionType.DEPOSIT);
-        deposit.setUsuario(usuario);
-        conta.setSaldo(dto.getValor() + conta.getSaldo());
-        deposit.setTimestamp(LocalDateTime.now());
-        deposit.setContas(Collections.singletonList(conta));
-
-        return movimentoRepo.save(deposit);
+        return movimentoRepo.save(criarMovimento(dto,TransactionType.TRANSFER));
     }
 
-    public Movimento witdraw (RequestTransacaoDto dto){
 
-        Usuario usuario = usuarioService.findOne(dto.getUsuario().getId());
+    public Movimento deposit(RequestTransacaoDto dto){
         Conta conta = contaService.findOne(dto.getContas().getId());
+        conta.setSaldo(conta.getSaldo() - dto.getValor());
+        return movimentoRepo.save(criarMovimento(dto,TransactionType.DEPOSIT));
+    }
 
-        Movimento witdraw = new Movimento();
-        witdraw.setValor(dto.getValor());
-        witdraw.setType(TransactionType.DEPOSIT);
-        witdraw.setUsuario(usuario);
-        conta.setSaldo(dto.getValor() - conta.getSaldo());
-        witdraw.setTimestamp(LocalDateTime.now());
-        witdraw.setContas(Collections.singletonList(conta));
+    public Movimento withdraw(RequestTransacaoDto dto){
+        Conta conta = contaService.findOne(dto.getContas().getId());
+        if (conta.getSaldo() < dto.getValor()){
+            throw new AccountSmallerValues("ERRO: Saldo é menor que o valor solicitado para sacar");
+        }
+        conta.setSaldo(conta.getSaldo() - dto.getValor());
+        contaRepo.save(conta);
 
-        return movimentoRepo.save(witdraw);
+        return (criarMovimento(dto,TransactionType.WITHDRAW));
     }
 
 }

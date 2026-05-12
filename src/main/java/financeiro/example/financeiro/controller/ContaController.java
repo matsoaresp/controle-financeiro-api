@@ -16,7 +16,7 @@ public class ContaController {
     private ContaService contaService;
 
     @PostMapping
-    public ResponseEntity<Conta> create (@RequestBody RequestContaDto dto) throws Exception {
+    public ResponseEntity<Conta> create (@RequestBody RequestContaDto dto) {
         Conta conta = contaService.create(dto);
         return ResponseEntity.status(201).body(conta);
     }

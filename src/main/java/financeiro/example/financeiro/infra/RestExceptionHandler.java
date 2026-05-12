@@ -2,6 +2,7 @@ package financeiro.example.financeiro.infra;
 
 import financeiro.example.financeiro.exception.Conta.AccountDataIncorrect;
 import financeiro.example.financeiro.exception.Conta.AccountNotFound;
+import financeiro.example.financeiro.exception.Conta.AccountSmallerValues;
 import financeiro.example.financeiro.exception.Conta.AccountValueException;
 import financeiro.example.financeiro.exception.Usuario.EmailAlreadyExistsException;
 import financeiro.example.financeiro.exception.Usuario.UserFullException;
@@ -47,5 +48,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> AccountNotFoundHandler(AccountNotFound exception){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Conta não eEncontrada");
+    }
+
+    @ExceptionHandler(AccountSmallerValues.class)
+    private ResponseEntity<String> AccountSmallerValues(AccountSmallerValues exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("O saldo da conta é menor que deseja sacar");
     }
 }

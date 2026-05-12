@@ -9,7 +9,6 @@ import financeiro.example.financeiro.enums.ContaType;
 import financeiro.example.financeiro.exception.Conta.AccountDataIncorrect;
 import financeiro.example.financeiro.exception.Conta.AccountNotFound;
 import financeiro.example.financeiro.repository.ContaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -17,11 +16,13 @@ import java.util.List;
 @Service
 public class ContaService {
 
-    @Autowired
-    private ContaRepository contaRepository;
+    private final ContaRepository contaRepository;
+    private final UsuarioService usuarioService;
 
-    @Autowired
-    private UsuarioService usuarioService;
+    public ContaService(ContaRepository contaRepository, UsuarioService usuarioService) {
+        this.contaRepository = contaRepository;
+        this.usuarioService = usuarioService;
+    }
 
     public Conta create (RequestContaDto contaDto){
 
@@ -50,7 +51,7 @@ public class ContaService {
     public Conta findOne (Long id) {
         return contaRepository.findById(id).orElseThrow(AccountNotFound::new);
     }
-    public void delete (Long id) throws Exception {
+    public void delete (Long id){
         Conta conta = findOne(id);
         contaRepository.delete(conta);
     }

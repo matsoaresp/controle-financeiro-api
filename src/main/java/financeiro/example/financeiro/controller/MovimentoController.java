@@ -31,7 +31,7 @@ public class MovimentoController {
 
     @PostMapping("/saque")
     public ResponseEntity<Movimento> withdraw (@RequestBody RequestTransacaoDto dto){
-        Movimento withdraw = service.witdraw(dto);
+        Movimento withdraw = service.withdraw(dto);
         return ResponseEntity.status(201).body(withdraw);
     }
 
