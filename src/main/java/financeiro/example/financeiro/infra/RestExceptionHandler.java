@@ -4,6 +4,7 @@ import financeiro.example.financeiro.exception.Conta.AccountDataIncorrect;
 import financeiro.example.financeiro.exception.Conta.AccountNotFound;
 import financeiro.example.financeiro.exception.Conta.AccountSmallerValues;
 import financeiro.example.financeiro.exception.Conta.AccountValueException;
+import financeiro.example.financeiro.exception.Movimento.MovementNotFoundException;
 import financeiro.example.financeiro.exception.Usuario.EmailAlreadyExistsException;
 import financeiro.example.financeiro.exception.Usuario.UserFullException;
 import financeiro.example.financeiro.exception.Usuario.UserNotFoundException;
@@ -54,5 +55,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> AccountSmallerValues(AccountSmallerValues exception){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("O saldo da conta é menor que deseja sacar");
+    }
+
+    @ExceptionHandler(MovementNotFoundException.class)
+    private ResponseEntity<String> MovementNotFound(MovementNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Movimento não encontrado");
     }
 }

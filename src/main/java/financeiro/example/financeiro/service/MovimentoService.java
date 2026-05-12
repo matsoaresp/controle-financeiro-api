@@ -6,12 +6,14 @@ import financeiro.example.financeiro.entity.Movimento;
 import financeiro.example.financeiro.entity.Usuario;
 import financeiro.example.financeiro.enums.TransactionType;
 import financeiro.example.financeiro.exception.Conta.AccountSmallerValues;
+import financeiro.example.financeiro.exception.Movimento.MovementNotFoundException;
 import financeiro.example.financeiro.repository.ContaRepository;
 import financeiro.example.financeiro.repository.MovimentoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class MovimentoService {
@@ -27,7 +29,6 @@ public class MovimentoService {
         this.contaService = contaService;
         this.contaRepo = contaRepo;
     }
-
 
     private Movimento criarMovimento (
             RequestTransacaoDto dto,
@@ -53,14 +54,14 @@ public class MovimentoService {
             conta.setSaldo(conta.getSaldo() - dto.getValor());
             contaRepo.save(conta);
 
-        return movimentoRepo.save(criarMovimento(dto,TransactionType.TRANSFER));
+        return (criarMovimento(dto,TransactionType.TRANSFER));
     }
 
 
     public Movimento deposit(RequestTransacaoDto dto){
         Conta conta = contaService.findOne(dto.getContas().getId());
-        conta.setSaldo(conta.getSaldo() - dto.getValor());
-        return movimentoRepo.save(criarMovimento(dto,TransactionType.DEPOSIT));
+        conta.setSaldo(conta.getSaldo() + dto.getValor());
+        return (criarMovimento(dto,TransactionType.DEPOSIT));
     }
 
     public Movimento withdraw(RequestTransacaoDto dto){
@@ -72,6 +73,14 @@ public class MovimentoService {
         contaRepo.save(conta);
 
         return (criarMovimento(dto,TransactionType.WITHDRAW));
+    }
+
+    public Movimento findOne (Long id){
+        return movimentoRepo.findById(id).orElseThrow(MovementNotFoundException::new);
+    }
+
+    public List<Movimento> findAll(){
+        return movimentoRepo.findAll();
     }
 
 }

@@ -35,7 +35,7 @@ public class ContaController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<Void> delete (@PathVariable Long id) throws  Exception{
+    public ResponseEntity<Void> delete (@PathVariable Long id){
         contaService.delete(id);
         return ResponseEntity.noContent().build();
     }
