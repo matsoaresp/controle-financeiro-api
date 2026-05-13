@@ -28,7 +28,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
-    private List<Transacao> transacoes;
+    private List<Movimento> transacoes;
 
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;

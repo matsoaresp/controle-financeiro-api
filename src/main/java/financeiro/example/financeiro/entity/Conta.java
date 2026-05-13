@@ -2,7 +2,6 @@ package financeiro.example.financeiro.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import financeiro.example.financeiro.enums.ContaType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,6 +35,6 @@ public class Conta {
 
     @ManyToMany(mappedBy = "contas")
     @JsonIgnoreProperties("contas")
-    private List<Transacao> transacoes;
+    private List<Movimento> transacoes;
 
 }
