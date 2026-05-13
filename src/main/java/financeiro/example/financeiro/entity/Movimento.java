@@ -1,6 +1,5 @@
 package financeiro.example.financeiro.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import financeiro.example.financeiro.enums.TransactionStatus;
 import financeiro.example.financeiro.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Transacao {
+public class Movimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
